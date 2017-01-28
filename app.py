@@ -18,6 +18,20 @@ import io
 
 from flask.ext.pymongo import PyMongo
 
+import os 
+import stripe
+
+
+
+
+#I am using this for stripe payments 
+stripe_keys = {
+  'secret_key': os.environ['SECRET_KEY'],
+  'publishable_key': os.environ['PUBLISHABLE_KEY']
+}
+
+stripe.api_key = stripe_keys['secret_key']
+
 
 
 
@@ -34,6 +48,54 @@ GITHUB_CLIENT_SECRET = '4546c8ad9a318648c9b7feaf19dc7ddabf5736ae'
 # setup flask
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+########### This is for the stripe part #####################
+####
+@app.route('/ty', methods=['POST'])
+def charge():
+    # Amount in cents
+    amount = 500
+
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        source=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='usd',
+        description='Flask Charge'
+    )
+
+
+    ## Fetching the user and project from the showgig page so that i can 
+    ## read the database and see which is the dropbox link for that project 
+    user = request.form['user']
+    project = request.form['project']
+
+
+    ## Searching the database for the corresponding project 
+    users = mongo.db.user
+    results = users.find_one({'name': user, 'gigs':project})
+    dropbox = results['dropbox']
+
+    return render_template('ty.html', amount=amount, dropbox = dropbox)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ###### Setting the cconfigurating for MONGODB #########
@@ -192,6 +254,9 @@ def showgig():
 
         projectname = str(request.form['projectname']).strip()
         description = str(request.form['description']).strip()
+        dropbox = str(request.form['dropbox']).strip()
+        dropbox.replace("dl=0","dl=1") # I need to add a test case here 
+
 
         ## Fetching all user Infor for gig page
         #######################################
@@ -212,7 +277,7 @@ def showgig():
         ## Since gig is posted, lets add it to the collection of the users gigs
         #######################################################################
         users = mongo.db.user
-        users.update({'email':email},{'$push':{'gigs':projectname,'youtube':embed_code,'MDcontents':fileContents}})
+        users.update({'email':email},{'$push':{'gigs':projectname,'youtube':embed_code,'MDcontents':fileContents,'dropbox':dropbox}})
 
         ##########################################################
         ## Also adding the link to the explorelinks mongo document
@@ -226,7 +291,7 @@ def showgig():
 
         return render_template('showgig.html',data = embed_code\
             ,markdownData=fileContents,projectname=projectname\
-            ,avatar=avatar,name=name,location=location,email=email,giturl=giturl)
+            ,avatar=avatar,name=name,location=location,email=email,giturl=giturl,key=stripe_keys['publishable_key'])
 
     if request.method == "GET":
         # GET request is not valid for this URL route 
@@ -389,7 +454,7 @@ def dynamic_page(user,gig):
 
                 return render_template('showgig.html',data = embed_code\
                     ,markdownData=fileContents,projectname=projectname\
-                    ,avatar=avatar,location=location)
+                    ,avatar=avatar,location=location,user=user,key=stripe_keys['publishable_key'])
 
             else:
                 #This is not a valid project
@@ -414,6 +479,7 @@ def explore():
         gigs.append(record['gigs'])
         links.append(record['link'])
         embed_code.append(record['embed_code'])
+
     return render_template('explore.html',video=embed_code,title = gigs, description=description,link=links)
 
 
