@@ -36,7 +36,7 @@ stripe.api_key = stripe_keys['secret_key']
 
 
 
-DATABASE_URI = 'sqlite:////tmp/github-flask.db'
+DATABASE_URI = 'sqlite:///github-flask.db'
 SECRET_KEY = 'development key'
 DEBUG = True
 
