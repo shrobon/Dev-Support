@@ -200,7 +200,7 @@ def showgig():
         with io.open(str("./"+filename),'r',encoding='utf8') as markdownFile:
             fileContents = markdownFile.read() 
         '''
-        fileContents = f.read('utf-8')
+        fileContents = f.read(charset='utf-8')
         projectname = str(request.form['projectname']).strip()
         description = str(request.form['description']).strip()
         dropbox = str(request.form['dropbox']).strip()
