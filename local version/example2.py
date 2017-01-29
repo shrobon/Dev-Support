@@ -191,7 +191,6 @@ def showgig():
         embed_code = search.group(2)
 
         f = request.files['markdown']
-        f = request.files['markdown']
         '''
         f.save(secure_filename(f.filename))
         #This is the readme file
@@ -200,7 +199,7 @@ def showgig():
         with io.open(str("./"+filename),'r',encoding='utf8') as markdownFile:
             fileContents = markdownFile.read() 
         '''
-        filecontents = f.read()
+        fileContents = f.read()
         projectname = str(request.form['projectname']).strip()
         description = str(request.form['description']).strip()
         dropbox = str(request.form['dropbox']).strip()
