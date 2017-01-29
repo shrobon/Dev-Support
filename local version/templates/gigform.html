@@ -1,0 +1,85 @@
+<html>
+	
+	<head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+    	<div class="container">
+	
+			<div class="col s12 m12 l12">
+	    		<div class="row">
+	    			<div class="center-align">
+	    				<h4>Fill up your Gig Info</h4>
+	    				<img class="circle responsive-img" style="height:65px;width:65px;"  src="{{ avatar }}">
+	    			</div>
+	    		</div>
+
+	    		<div class="card">
+	  					<br>
+
+			    	<!-- This is the file input form-->
+				    <form action="http://localhost:5000/showgig", method="POST" enctype="multipart/form-data">
+					  	
+				        <div class="row">
+				          <div class="input-field col s6 m6 l6 offset-s3 offset-m3 offset-l3">
+				            <input id="input_text" type="text" length="30" name="projectname" class="validate" required="" aria-required="true">
+				            <label for="input_text">Your cool project name</label>
+				          </div>
+				        </div>
+
+				        <div class="row">
+				          <div class="input-field col s6 m6 l6 offset-s3 offset-m3 offset-l3">
+				            <input id="input_text" type="url" name="URL" class="validate" required="" aria-required="true">
+				            <label for="input_text">Youtube video Url</label>
+				          </div>
+				        </div>
+
+
+				        <div class="row">
+						    <div class="file-field input-field col s6 m6 l6 offset-s3 offset-m3 offset-l3">
+						      <div class="btn"><span>Upload Markdown File</span> <input type=file name="markdown" ></div>
+						      <div class="file-path-wrapper">
+        						<input class="file-path validate" type="text" class="validate" required="" aria-required="true">
+      						  </div>
+    						</div>
+					    </div>
+
+				        <div class="row">
+				          <div class="input-field col s6 m6 l6 offset-s3 offset-m3 offset-l3">
+				            <textarea id="textarea1" class="materialize-textarea" length="120" class="validate" required="" aria-required="true"></textarea>
+				            <label for="textarea1">Enter a short description.</label>
+				          </div>
+				        </div>
+
+
+
+					    <div class="row">
+					    	<div class="input-field col s6 m6 l6 offset-s3 offset-m3 offset-l3 center-align">
+					    		<button class="btn waves-effect waves-light red" type="submit">Submit<i class="material-icons right">send</i></button>
+					    	</div>
+					    </div>
+					    
+					    <br>
+
+
+					</form>
+	    		</div><!-- The form card here -->
+
+		</div><!-- Container ends here -->
+
+
+
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/materialize.min.js"></script>
+
+    </body>
+
+</html>

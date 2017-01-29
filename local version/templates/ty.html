@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Thank you</title>
+
+
+		 <!-- Compiled and minified CSS -->
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+		  <!-- Compiled and minified JavaScript -->
+		  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    </head>
+
+
+
+	<body class="center-align">
+		  <h2>Thanks, you payed <strong>$5.00</strong>!</h2>
+		  <a class="waves-effect waves-light btn-large z-depth-4 submit" href="{{dropbox}}" id="mybutton" type="button" />Click to explore !!</a>
+
+		  <!--This is for the auto download of the code file -->
+	</body>
+
+	<!-- This is for force downloading the script and chanding the link of the button -->
+	<script>
+		document.getElementsByClassName("submit")[0].click();
+		var button = document.getElementById("mybutton");
+		button.setAttribute('href', "http://localhost:5000/explore");
+	</script>
+
+
+</html>
