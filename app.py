@@ -26,8 +26,8 @@ import stripe
 
 #I am using this for stripe payments 
 stripe_keys = {
-  'secret_key': os.environ['SECRET_KEY'],
-  'publishable_key': os.environ['PUBLISHABLE_KEY']
+  'secret_key': 'sk_test_pBOsfFhf1SPeP7XfFLmlwi8o',
+  'publishable_key': 'pk_test_5PT5eNn5SEl8jdnmlxBAGZxB'
 }
 
 stripe.api_key = stripe_keys['secret_key']
@@ -51,19 +51,6 @@ app.config.from_object(__name__)
 
 ########### This is for the stripe part #####################
 ####
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -236,13 +223,13 @@ def showgig():
         ## Since gig is posted, lets add it to the collection of the users gigs
         #######################################################################
         users = mongo.db.user
-        users.update({'email':email},{'$push':{'gigs':projectname,'youtube':embed_code,'MDcontents':fileContents,'dropbox':dropbox}})
+        users.update({'email':email},{'$push':{'gigs':projectname,'youtube':embed_code,'MDcontents':fileContents,'dropbox':dropbox,'thumbsup':0}})
 
         ##########################################################
         ## Also adding the link to the explorelinks mongo document
         ##########################################################
         explore_links = mongo.db.explorelinks
-        explore_links.insert({'link':link,'gigs':projectname,'description':description,'embed_code':embed_code})
+        explore_links.insert({'link':link,'gigs':projectname,'description':description,'embed_code':embed_code,'thumbsup':0})
 
 
 
@@ -390,7 +377,7 @@ def user():
 #### Explore Page 
 #### Need to dynamically generate the cards
 #############################################
-@app.route('/explore/<string:user>/<string:gig>',methods=["GET","POST"])
+@app.route('/explore/<string:user>/<string:gig>',methods=["POST","GET"])
 def dynamic_page(user,gig):
     if request.method == "GET":
         #check if the user exists and the gig exists 
@@ -398,6 +385,46 @@ def dynamic_page(user,gig):
             # then get all the user details and populate the page of showgig
         #return user+' '+gig
         
+        users = mongo.db.user
+        data= users.find_one({'name': user})
+        gigs= data['gigs']
+
+
+
+
+
+
+        if gig !="" and user != "":
+            if gig in gigs:
+                #This means that the gig exists
+                index = gigs.index(gig)
+                embed_code= data['youtube'][index]
+                fileContents = data['MDcontents'][index]
+                avatar = data['avatar']
+                location = data['location']
+                email = data['email']
+                projectname = gig
+
+
+                explorelinks = mongo.db.explorelinks
+                ## query the explore links database 
+                data1 = explorelinks.find_one({'gigs':gig})
+                likes = data1['thumbsup']
+
+
+                return render_template('showgig.html',data = embed_code\
+                    ,markdownData=fileContents,projectname=projectname\
+                    ,avatar=avatar,location=location,email=email,user=user,key=stripe_keys['publishable_key'],likes=likes)
+
+            else:
+                #This is not a valid project
+                return render_template('notfound.html', pic='/static/404.png'), 404
+
+
+
+
+    if request.method == "POST":
+        # This has been done to increase the like counter for the project
         users = mongo.db.user
         data= users.find_one({'name': user})
         gigs= data['gigs']
@@ -411,13 +438,25 @@ def dynamic_page(user,gig):
                 location = data['location']
                 projectname = gig
 
+                explorelinks = mongo.db.explorelinks
+                ## query the explore links database 
+                data1 = explorelinks.find_one({'gigs':gig})
+## changes made here 
+                likes = data1['thumbsup']
+                #incrementing the like counter 
+                likes = int(likes) + 1
+                #updating the like counter in mongodb
+                explorelinks.update({'gigs':gig},{'$set':{'thumbsup':likes}})
+
                 return render_template('showgig.html',data = embed_code\
                     ,markdownData=fileContents,projectname=projectname\
-                    ,avatar=avatar,location=location,user=user,key=stripe_keys['publishable_key'])
+                    ,avatar=avatar,location=location,user=user,key=stripe_keys['publishable_key'],likes=likes)
 
             else:
                 #This is not a valid project
                 return render_template('notfound.html', pic='/static/404.png'), 404
+
+
         
 
 

@@ -1,19 +1,16 @@
-
-
-
 <!DOCTYPE html> 
 <html> 
-	<head>
+  <head>
 
-	  <title>Dev Support</title> <meta charset="utf-8"> 
+    <title>Dev Support</title> <meta charset="utf-8"> 
 
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 
-	  <!-- Compiled and minified JavaScript -->
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -24,41 +21,34 @@
 
       <!--For responsive design of the youtube video player-->
       <style>
-		.video-container {
-			position:relative;
-			padding-bottom:56.25%;
-			padding-top:30px;
-			height:0;
-			overflow:hidden;
-		}
-
-		.video-container iframe, .video-container object, .video-container embed {
-			position:absolute;
-			top:0;
-			left:0;
-			width:100%;
-			height:100%;
-		}
-
-		.video-container2 h5 {
-			position:absolute;
-			top:0;
-			left:0;
-			width:80%;
-			height:80%;
-		}
-
-
-		.video-container1 {
-			position:relative;
-			overflow:hidden;
-		}
-
-
-		}
-
+    .video-container {
+      position:relative;
+      padding-bottom:56.25%;
+      padding-top:30px;
+      height:0;
+      overflow:hidden;
+    }
+    .video-container iframe, .video-container object, .video-container embed {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    }
+    .video-container2 h5 {
+      position:absolute;
+      top:0;
+      left:0;
+      width:80%;
+      height:80%;
+    }
+    .video-container1 {
+      position:relative;
+      overflow:hidden;
+    }
+    }
       </style>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
      </head>
 
@@ -69,40 +59,58 @@
 <!--Body part contains the heading and the video player-->
 <body>
 
-	<div class = "container  center-align z-depth-5">
-		<h1><img class="circle responsive-img" style="height:35px;width:35px;"  src="{{ avatar }}">&nbsp; {{ projectname }}</h1>
-			<div class="video-container">
-			<iframe src="https://www.youtube.com/embed/{{ data }}" frameborder="0" allowfullscreen=""></iframe>
-			</div>
-	</div>
-	<br>
+  <div class = "container  center-align z-depth-5">
+    <h1><img class="circle responsive-img" style="height:35px;width:35px;"  src="{{ avatar }}">&nbsp; {{ projectname }}</h1>
+      <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/{{ data }}" frameborder="0" allowfullscreen=""></iframe>
+      </div>
+      <br>
+      <div class = "row">
+      <div class="col s4 m4 l4 offset-s1 offset-m1 offset-l1">
+          <form method="POST" action="{{ request.path }}">
+           <button class="btn waves-effect waves-default"  type="submit" ><i class ="material-icons">thumb_up</i></button>
+           <p>{{ likes }}</p>
+          </form>
+      </div>
+         <div class="col s4 m4 l4 ">
+          <form action="/ty" method="post">
+            <input type="hidden" name="user" value="{{ user }}">
+            <input type="hidden" name="project" value="{{ projectname }}">
+            <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="{{ key }}"></script>
+          </form>
+         </div>
+         </div>
+  </div>
+  <br>
 
-	<div class = "container z-depth-5">
-			<div class="video-container1 ">
-			<div class="video-container2 row">
+  <div class = "container z-depth-5">
+      <div class="video-container1 ">
+      <div class="video-container2 row">
 
-				<!--Thi is for the pay with stripe button -->
-				<div class="col s6 m6 l6 ">
-					<form action="/ty" method="post">
-				    <article>
-				      <label>Amount: $5.00</label>
-				    </article>
-				    <input type="hidden" name="user" value="{{ user }}">
-				    <input type="hidden" name="project" value="{{ projectname }}">
-				    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="{{ key }}"></script>
-				  </form>
-				</div>
+        <!--Thi is for the pay with stripe button -->
+        
+        <div class="row">
+            <h3 class="col s10 m10 l10 offset-s1 offset-m1 offset-l1">Developer's Information</h3>
+          <div class="col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+                <p><strong>Email   : </strong>{{email}}</p>
+                <p><strong>Location   :</strong> {{location}}</p>
+
+          </div>
+          <div class="col s3 m3 l3 ">
+                <p></p>
+                <p></p>
+          </div>
+
+        </div>
 
 
-				 <div class="col s6 m6 l6 ">
-				 	 <a class="waves-effect waves-light btn">button</a>
-				 </div>
 
-			</div>
 
-			</div>
-	</div>
-	<br>
+      </div>
+
+      </div>
+  </div>
+  <br>
 </body>
 
 
