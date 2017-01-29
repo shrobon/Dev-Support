@@ -1,0 +1,180 @@
+<html>
+	
+	<head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+	  <!-- Compiled and minified JavaScript -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+<!--This part is for the navigation bar -->
+  <nav>
+    <div class="nav-wrapper center-align z-depth-4">
+      <a href="#!" class="brand-logo">Dev Support</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{url_for('explore')}}">Explore</a></li>
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="{{url_for('explore')}}">Explore</a></li>
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+    	<div class="container">
+    			<br>
+
+			  <div class="row ">
+				    <div class="col s12 m10 l10 z-depth-4 center-align">
+				      <ul class="tabs ">
+				        <li class="tab col s3"><a href="#profile">Profile</a></li>
+				        <li class="tab col s3"><a class="active" href="#create">Create New</a></li>
+				        <li class="tab col s3"><a href="#gigs">My Projects</a></li>
+				      </ul>
+				    </div>
+
+				    <!-- For the Profile Information Tab-->
+				    <div id="profile" class="col s12 m12 l12 center-align">
+				    	<br>
+				    	<img class="circle responsive-img" style="height:65px;width:65px;"  src="{{ avatar }}">
+				    	<br>
+				    	<h6><strong class="red-text text-lighten-2">Name</strong>     : {{ name }} </h6>
+				    	<h6><strong class="red-text text-lighten-2">Email</strong>  : {{ email }} </h6>
+				    	<h6><strong class="red-text text-lighten-2">Location</strong> : {{ location }} </h6>
+				    	<h6><strong class="red-text text-lighten-2">GitHub</strong>  : {{ giturl }} </h6>
+
+
+				    </div>
+
+
+
+
+
+
+
+			    	<!-- For the Gig Create Tab-->
+			    	<div id="create" class="col s10 m10 l10 c offset-s1">
+
+			    			<br>
+
+							<div class="">
+				  					<br>
+
+						    	<!-- This is the file input form-->
+							    <form action="https://devsupport.herokuapp.com/showgig", method="POST" enctype="multipart/form-data">
+								  	
+							        <div class="row">
+							          <div class="input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+							            <input id="input_text" type="text" length="30" name="projectname" class="validate" required="" aria-required="true">
+							            <label for="input_text">Your cool project name</label>
+							          </div>
+							        </div>
+
+							        <div class="row">
+							          <div class="input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+							            <input id="input_text" type="url" name="URL" class="validate" required="" aria-required="true">
+							            <label for="input_text">Youtube video Url</label>
+							          </div>
+							        </div>
+
+
+							        <div class="row">
+							          <div class="input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+							            <input id="input_text" type="url" name="dropbox" class="validate" required="" aria-required="true">
+							            <label for="input_text">Your shared Dropbox code Link</label>
+							          </div>
+							        </div>
+
+
+							        <div class="row">
+									    <div class="file-field input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+									      <div class="btn"><span>Upload Markdown File</span> <input type=file name="markdown" ></div>
+									      <br>
+									      <br>
+									      <div class="file-path-wrapper">
+			        						<input class="file-path validate" type="text" class="validate" required="" aria-required="true">
+			      						  </div>
+			    						</div>
+								    </div>
+
+							        <div class="row">
+							          <div class="input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+							            <textarea id="textarea1" class="materialize-textarea" length="120" class="validate" required="" aria-required="true" name="description"></textarea>
+							            <label for="textarea1">Enter a short description.</label>
+							          </div>
+							        </div>
+
+
+
+								    <div class="row">
+								    	<div class="input-field col s8 m8 l8 offset-s2 offset-m2 offset-l2">
+								    		<button class="btn waves-effect waves-light red" type="submit">Submit<i class="material-icons right">send</i></button>
+								    	</div>
+								    </div>
+								    
+								    <br>
+
+
+								</form>
+				    		</div><!-- The form card here -->
+
+			    	</div><!-- The Create a new gig form ends here -->
+
+
+			    <!-- For the Current Gigs Tab-->
+			    <div id="gigs" class="col s10 m10 l10 center-align offset-s1">
+			    	<!--I will loop through the gigs dictionary and print out the results here -->
+
+			    	      <div class="collection">
+			    	      {% for gig in gigs%}
+					        <a href="{{link}}{{gig}}" class="collection-item">{{ gig }}</a>
+					       {% endfor %}
+
+					      </div>
+
+	
+			    	
+
+
+			    </div>
+
+
+			 </div><!--For the row div after the container -->
+	
+		</div><!-- Container ends here -->
+
+
+
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/materialize.min.js"></script>
+    <script>
+$( document ).ready(function(){
+	$(".button-collapse").sideNav();
+})
+</script>
+
+    </body>
+
+</html>

@@ -32,17 +32,17 @@ stripe_keys = {
 
 stripe.api_key = stripe_keys['secret_key']
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+DATABASE = 'github-flask.db'
+DATABASEPATH= os.path.join(basedir,DATABASE)
 
-
-
-
-DATABASE_URI = 'sqlite:////tmp/github-flask.db'
+DATABASE_URI = 'sqlite:///'+DATABASEPATH
 SECRET_KEY = 'development key'
 DEBUG = True
 
 # Github App Registration
-GITHUB_CLIENT_ID = 'a8c6f8e2828251d35ef2'
-GITHUB_CLIENT_SECRET = '4546c8ad9a318648c9b7feaf19dc7ddabf5736ae'
+GITHUB_CLIENT_ID = '7be478dde53db06a83bb'
+GITHUB_CLIENT_SECRET = '53d420511f625512cad0b483eb99c09d17a8807e'
 
 
 # setup flask
@@ -191,7 +191,6 @@ def showgig():
         embed_code = search.group(2)
 
         f = request.files['markdown']
-        f = request.files['markdown']
         '''
         f.save(secure_filename(f.filename))
         #This is the readme file
@@ -217,7 +216,7 @@ def showgig():
         giturl = UserDict['html_url']
 
         ## Genrating the dynamic link where i can find the project portfolio 
-        link = "http://localhost:5000/explore/"+ giturl.split('https://github.com/')[1]+'/'+projectname
+        link = "https://devsupport.herokuapp.com/explore/"+ giturl.split('https://github.com/')[1]+'/'+projectname
 
 
 
@@ -280,7 +279,7 @@ def gigform():
             # if yes , we need to send the data to the created gigs tab 
             info = users.find_one({'email':email})
             gigs= info['gigs']
-            link = "http://localhost:5000/explore/"+ giturl.split('https://github.com/')[1]+'/'
+            link = "https://devsupport.herokuapp.com/explore/"+ giturl.split('https://github.com/')[1]+'/'
 
         return render_template('gigform1.html',avatar=avatar,name=name\
             ,location=location,email=email,giturl=giturl,gigs=gigs,link=link)
