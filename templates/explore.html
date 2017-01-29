@@ -72,7 +72,11 @@
 <!--This is where a row of cards start -->
 
  <div class = "row">
-    {% for i in range(3)%}
+
+    {% for i in range(3) %}
+        {% if i  < length %}
+
+
 
         <div class="col s12 m4 l4 offset-1 center-align ">
           <div class="card-panel medium hoverable center">
@@ -97,6 +101,9 @@
           </div>
         </div>
 
+        {% endif %}
+
+
     {% endfor %}
   </div> <!--One  row (set of 3) cards ends here-->
 
@@ -107,6 +114,7 @@
 
  <div class = "row">
     {% for i in range(3,6)%}
+        {% if i  < length %}
 
         <div class=" s12 col m4 l4 offset-1 center-align ">
           <div class="card-panel hoverable center medium ">
@@ -130,6 +138,10 @@
           </div>
         </div>
 
+        {% endif %}
+
+
+
     {% endfor %}
   </div> <!--One  row (set of 3) cards ends here-->
 
@@ -146,6 +158,8 @@
 
    <div class = "row">
     {% for i in range(6,9)%}
+        {% if i  < length %}
+
 
         <div class="col s12 m4 l4 offset-1 center-align">
           <div class="card-panel hoverable center medium ">
@@ -170,6 +184,10 @@
           </div>
         </div>
 
+        {% endif %}
+
+
+
     {% endfor %}
   </div> <!--One  row (set of 3) cards ends here-->
 
@@ -187,8 +205,9 @@
 
    <div class = "row">
     {% for i in range(9,12)%}
+        {% if i  < length %}
 
-        <div class="col s12 m4 l4 offset-1 center-align">
+          <div class="col s12 m4 l4 offset-1 center-align">
           <div class="card-panel hoverable center medium">
           
                 <div class="card-image waves-effect waves-block waves-light hoverable">
@@ -210,6 +229,11 @@
           </div>
         </div>
 
+        `
+        {% endif %}
+
+
+
     {% endfor %}
   </div> <!--One  row (set of 3) cards ends here-->
 
@@ -223,8 +247,6 @@
  <ul class="pagination">
     <li><a href="#">&laquo;</a></li>
     <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
     <li><a href="#">&raquo;</a></li>
   </ul>
 </div>
