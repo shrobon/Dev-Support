@@ -44,7 +44,6 @@ jupyter==1.0.0
 jupyter-client==4.4.0
 jupyter-console==5.0.0
 jupyter-core==4.2.0
-Keras==1.1.2
 lazy-object-proxy==1.2.2
 lxml==3.7.0
 Markdown==2.6.7
@@ -99,6 +98,7 @@ six==1.10.0
 snowballstemmer==1.2.1
 Sphinx==1.5
 SQLAlchemy==1.1.5
+statsmodels==0.8.0rc1
 stripe==1.47.0
 subprocess32==3.2.7
 tensorflow==0.11.0
