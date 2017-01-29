@@ -32,11 +32,11 @@ stripe_keys = {
 
 stripe.api_key = stripe_keys['secret_key']
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+DATABASE = 'flasktaskr.db'
+DATABASEPATH= os.path.join(basedir,DATABASE)
 
-
-
-
-DATABASE_URI = 'sqlite:////tmp/github-flask.db'
+DATABASE_URI = 'sqlite:///'+DATABASEPATH
 SECRET_KEY = 'development key'
 DEBUG = True
 
