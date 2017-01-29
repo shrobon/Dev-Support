@@ -98,7 +98,7 @@ six==1.10.0
 snowballstemmer==1.2.1
 Sphinx==1.5
 SQLAlchemy==1.1.5
-stripe==1.47.0
+stripe==1.46.0
 subprocess32==3.2.7
 terminado==0.6
 tornado==4.4.2
