@@ -51,6 +51,30 @@ app.config.from_object(__name__)
 
 ########### This is for the stripe part #####################
 ####
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###### Setting the cconfigurating for MONGODB #########
+app.config['MONGO_DBNAME'] = "connect_to_mongo"
+app.config['MONGO_URI'] = "mongodb://shrobon:biswas@ds133279.mlab.com:33279/connect_to_mongo"
+mongo = PyMongo(app)
+## check in terminal from mongo_connect import mongo
+
 @app.route('/ty', methods=['POST'])
 def charge():
     # Amount in cents
@@ -78,74 +102,9 @@ def charge():
     ## Searching the database for the corresponding project 
     users = mongo.db.user
     results = users.find_one({'name': user, 'gigs':project})
-    dropbox = results['dropbox']
+    print results['dropbox']    
 
-    return render_template('ty.html', amount=amount, dropbox = dropbox)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-###### Setting the cconfigurating for MONGODB #########
-app.config['MONGO_DBNAME'] = "connect_to_mongo"
-app.config['MONGO_URI'] = "mongodb://shrobon:biswas@ds133279.mlab.com:33279/connect_to_mongo"
-mongo = PyMongo(app)
-## check in terminal from mongo_connect import mongo
-
-
-
-## Application context is given to us by the view 
-## Basic MongoDB Operations
-##########################################################################
-@app.route('/add')
-def add():
-    user = mongo.db.user # if user collection is not there , then it will be created 
-    #mongo is the mongo shell object , db is the database we use , users is the collection
-    user.insert({'name':'Shrobon','language':'Python'})
-    user.insert({'name':'Damayanti','language':'C'})
-    user.insert({'name':'Navneet','language':'Java'})
-    user.insert({'name':'Comet','language':'Haskell'})
-    return 'Added User !! '
-
-
-@app.route('/find')
-def find():
-    user = mongo.db.user
-    see = user.find_one({'name':'Shrobon'})
-    return 'You Found ' + see['name'] + '.His fav lang is ' + see['language']
-
-
-@app.route('/update')
-def update():
-    user = mongo.db.user
-    dam = user.find_one({'name':'Damayanti'})
-    dam['language'] = 'JavaScript'
-    user.save(dam)
-    return 'You Found ' + dam['name'] + '.His fav lang is ' + dam['language']
-
-@app.route('/delete')
-def delete():
-    user = mongo.db.user
-    damayanti = user.find_one({'name':'Comet'})
-    user.remove(damayanti)
-    return 'Removed  Damayanti '
-
-##############################################################################
-
-
-
+    return render_template('ty.html', amount=amount, dropbox = results['dropbox'][0])
 
 
 # setup github-flask
@@ -255,7 +214,7 @@ def showgig():
         projectname = str(request.form['projectname']).strip()
         description = str(request.form['description']).strip()
         dropbox = str(request.form['dropbox']).strip()
-        dropbox.replace("dl=0","dl=1") # I need to add a test case here 
+        dropbox=dropbox.replace("dl=0","dl=1") # I need to add a test case here 
 
 
         ## Fetching all user Infor for gig page
