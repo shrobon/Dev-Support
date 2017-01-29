@@ -78,7 +78,7 @@ mongo = PyMongo(app)
 @app.route('/ty', methods=['POST'])
 def charge():
     # Amount in cents
-    amount = 500
+    amount = 5000
 
     customer = stripe.Customer.create(
         email='customer@example.com',
@@ -102,7 +102,7 @@ def charge():
     ## Searching the database for the corresponding project 
     users = mongo.db.user
     results = users.find_one({'name': user})
-    index = result['gigs'].index(project)
+    index = results['gigs'].index(project)
 
     return render_template('ty.html', amount=amount, dropbox = results['dropbox'][index])
 
