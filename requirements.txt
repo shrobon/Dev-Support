@@ -98,12 +98,9 @@ six==1.10.0
 snowballstemmer==1.2.1
 Sphinx==1.5
 SQLAlchemy==1.1.5
-statsmodels==0.8.0rc1
 stripe==1.47.0
 subprocess32==3.2.7
-tensorflow==0.11.0
 terminado==0.6
-Theano==0.9.0.dev4
 tornado==4.4.2
 traitlets==4.3.1
 wcwidth==0.1.7
