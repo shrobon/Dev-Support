@@ -239,7 +239,7 @@ def showgig():
 
         return render_template('showgig.html',data = embed_code\
             ,markdownData=fileContents,projectname=projectname\
-            ,avatar=avatar,name=name,location=location,email=email,giturl=giturl,key=stripe_keys['publishable_key'])
+            ,avatar=avatar,name=name,location=location,email=email,giturl=giturl,key=stripe_keys['publishable_key'],view=0)
 
     if request.method == "GET":
         # GET request is not valid for this URL route 
@@ -412,7 +412,7 @@ def dynamic_page(user,gig):
 
                 return render_template('showgig.html',data = embed_code\
                     ,markdownData=fileContents,projectname=projectname\
-                    ,avatar=avatar,location=location,email=email,user=user,key=stripe_keys['publishable_key'],likes=likes)
+                    ,avatar=avatar,location=location,email=email,user=user,key=stripe_keys['publishable_key'],likes=likes,view=1)
 
             else:
                 #This is not a valid project
