@@ -15,12 +15,14 @@ import stripe
 import re
 import markdown
 import io
+import sys
 
 from flask.ext.pymongo import PyMongo
 
 import os 
 import stripe
-
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 

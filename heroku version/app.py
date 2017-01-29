@@ -20,8 +20,9 @@ from flask.ext.pymongo import PyMongo
 
 import os 
 import stripe
-
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 #I am using this for stripe payments 
@@ -199,7 +200,7 @@ def showgig():
         with io.open(str("./"+filename),'r',encoding='utf8') as markdownFile:
             fileContents = markdownFile.read() 
         '''
-        filecontents = f.read()
+        fileContents = f.read()
         projectname = str(request.form['projectname']).strip()
         description = str(request.form['description']).strip()
         dropbox = str(request.form['dropbox']).strip()
