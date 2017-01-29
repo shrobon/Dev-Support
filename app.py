@@ -390,10 +390,6 @@ def dynamic_page(user,gig):
         gigs= data['gigs']
 
 
-
-
-
-
         if gig !="" and user != "":
             if gig in gigs:
                 #This means that the gig exists
@@ -478,7 +474,8 @@ def explore():
         links.append(record['link'])
         embed_code.append(record['embed_code'])
 
-    return render_template('explore.html',video=embed_code,title = gigs, description=description,link=links)
+
+    return render_template('explore.html',video=embed_code,title = gigs, description=description,link=links,length=len(links))
 
 
 
