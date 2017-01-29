@@ -214,7 +214,7 @@ def showgig():
         giturl = UserDict['html_url']
 
         ## Genrating the dynamic link where i can find the project portfolio 
-        link = "http://localhost:5000/explore/"+ giturl.split('https://github.com/')[1]+'/'+projectname
+        link = "https://devsupport.herokuapp.com/explore/"+ giturl.split('https://github.com/')[1]+'/'+projectname
 
 
 
@@ -277,7 +277,7 @@ def gigform():
             # if yes , we need to send the data to the created gigs tab 
             info = users.find_one({'email':email})
             gigs= info['gigs']
-            link = "http://localhost:5000/explore/"+ giturl.split('https://github.com/')[1]+'/'
+            link = "https://devsupport.herokuapp.com/explore/"+ giturl.split('https://github.com/')[1]+'/'
 
         return render_template('gigform1.html',avatar=avatar,name=name\
             ,location=location,email=email,giturl=giturl,gigs=gigs,link=link)
