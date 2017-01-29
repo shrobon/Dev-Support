@@ -31,11 +31,6 @@ lazy-object-proxy==1.2.2
 lxml==3.7.0
 Markdown==2.6.7
 markdown2==2.3.2
-MarkupSafe==0.23
-matplotlib==1.5.1
-mccabe==0.5.2
-mistune==0.7.3
-mock==2.0.0
 mpld3==0.3
 nbconvert==4.2.0
 nbformat==4.1.0
@@ -77,7 +72,6 @@ SQLAlchemy==1.1.5
 stripe==1.47.0
 subprocess32==3.2.7
 terminado==0.6
-Theano==0.9.0.dev4
 tornado==4.4.2
 traitlets==4.3.1
 wcwidth==0.1.7
