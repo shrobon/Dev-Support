@@ -101,10 +101,10 @@ def charge():
 
     ## Searching the database for the corresponding project 
     users = mongo.db.user
-    results = users.find_one({'name': user, 'gigs':project})
-    print results['dropbox']    
+    results = users.find_one({'name': user})
+    index = result['gigs'].index(project)
 
-    return render_template('ty.html', amount=amount, dropbox = results['dropbox'][0])
+    return render_template('ty.html', amount=amount, dropbox = results['dropbox'][index])
 
 
 # setup github-flask
