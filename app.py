@@ -41,8 +41,8 @@ SECRET_KEY = 'development key'
 DEBUG = True
 
 # Github App Registration
-GITHUB_CLIENT_ID = 'a8c6f8e2828251d35ef2'
-GITHUB_CLIENT_SECRET = '4546c8ad9a318648c9b7feaf19dc7ddabf5736ae'
+GITHUB_CLIENT_ID = '7be478dde53db06a83bb'
+GITHUB_CLIENT_SECRET = '53d420511f625512cad0b483eb99c09d17a8807e'
 
 
 # setup flask
