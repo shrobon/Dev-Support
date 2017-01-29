@@ -310,16 +310,14 @@ def unauth():
 @app.route('/github-callback')
 @github.authorized_handler
 def authorized(access_token):
-    next_url = url_for('unauth')
+    next_url = request.args.get('next') or url_for('index')
     if access_token is None:
         return redirect(next_url)
 
     user = User.query.filter_by(github_access_token=access_token).first()
-    
     if user is None:
         user = User(access_token)
         db_session.add(user)
-
     user.github_access_token = access_token
     db_session.commit()
 
