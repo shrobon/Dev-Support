@@ -310,14 +310,16 @@ def unauth():
 @app.route('/github-callback')
 @github.authorized_handler
 def authorized(access_token):
-    next_url = url_for('gigform')
+    next_url = url_for('unauth')
     if access_token is None:
-        return redirect(url_for('unauth')
+        return redirect(next_url)
 
     user = User.query.filter_by(github_access_token=access_token).first()
+    
     if user is None:
         user = User(access_token)
         db_session.add(user)
+
     user.github_access_token = access_token
     db_session.commit()
 
