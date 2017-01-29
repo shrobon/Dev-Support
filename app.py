@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, g, session, redirect, url_for
 from flask import render_template_string , render_template
 from flask.ext.github import GitHub
@@ -199,8 +200,7 @@ def showgig():
         with io.open(str("./"+filename),'r',encoding='utf8') as markdownFile:
             fileContents = markdownFile.read() 
         '''
-        fileContents = f.read()
-	fileContents = fileContents.decode('utf-8')
+        fileContents = f.read('utf-8')
         projectname = str(request.form['projectname']).strip()
         description = str(request.form['description']).strip()
         dropbox = str(request.form['dropbox']).strip()
