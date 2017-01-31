@@ -28,8 +28,8 @@ sys.setdefaultencoding('utf-8')
 
 #I am using this for stripe payments 
 stripe_keys = {
-  'secret_key': 'sk_test_pBOsfFhf1SPeP7XfFLmlwi8o',
-  'publishable_key': 'pk_test_5PT5eNn5SEl8jdnmlxBAGZxB'
+  'secret_key': '',
+  'publishable_key': ''
 }
 
 stripe.api_key = stripe_keys['secret_key']
@@ -43,8 +43,8 @@ SECRET_KEY = 'development key'
 DEBUG = True
 
 # Github App Registration
-GITHUB_CLIENT_ID = '7be478dde53db06a83bb'
-GITHUB_CLIENT_SECRET = '53d420511f625512cad0b483eb99c09d17a8807e'
+GITHUB_CLIENT_ID = ''
+GITHUB_CLIENT_SECRET = ''
 
 
 # setup flask
@@ -59,8 +59,8 @@ app.config.from_object(__name__)
 
 
 ###### Setting the cconfigurating for MONGODB #########
-app.config['MONGO_DBNAME'] = "connect_to_mongo"
-app.config['MONGO_URI'] = "mongodb://shrobon:biswas@ds133279.mlab.com:33279/connect_to_mongo"
+app.config['MONGO_DBNAME'] = "Enter your DB name"
+app.config['MONGO_URI'] = "Enter your DB URI"
 mongo = PyMongo(app)
 ## check in terminal from mongo_connect import mongo
 
